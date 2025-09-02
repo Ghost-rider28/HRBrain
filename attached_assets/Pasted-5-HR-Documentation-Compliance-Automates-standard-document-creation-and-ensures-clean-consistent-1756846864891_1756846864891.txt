@@ -1,0 +1,65 @@
+5. HR Documentation & Compliance
+
+Automates standard document creation and ensures clean, consistent recordkeeping. Implement the following:
+
+
+
+
+
+Draft offer letters, NDAs, and basic contracts: Use AI (e.g., OpenAI) to generate customizable templates for offer letters, NDAs, and contracts based on employee/candidate data. Allow HR to edit and save to Supabase storage.
+
+
+
+Maintain policy library: Create a searchable repository in Supabase storage for policy documents (e.g., HR policies, compliance guidelines). Allow HR to upload, update, and categorize policies.
+
+
+
+Log compliance reports: Track compliance activities (e.g., policy acknowledgments, training completions) in a Supabase table. Generate downloadable reports for audits.
+
+
+
+Generate exit letters and experience docs: Automatically create exit letters and experience certificates using templates and employee data. Store and email documents via SendGrid.
+
+6. Performance Reviews & Feedback
+
+Makes the feedback process smoother and more insightful for managers and HR. Implement the following:
+
+
+
+
+
+Collect self and peer reviews through templates: Provide customizable review templates (e.g., rating scales, open-ended questions) for employees and peers. Collect responses via a web form and store in Supabase.
+
+
+
+Summarize performance notes: Use AI to summarize open-ended feedback into concise notes for managers.
+
+
+
+Analyze sentiment in feedback: Apply NLP (e.g., Hugging Face Transformers) to detect sentiment (positive, negative, neutral) in feedback responses.
+
+
+
+Suggest development or recognition actions: Based on feedback and sentiment, recommend actions (e.g., “Enroll in leadership training” or “Recognize for teamwork”) using predefined rules or AI.
+
+7. Pulse Checks & Engagement Monitoring
+
+Gauges team sentiment and engagement to detect burnout or dissatisfaction. Implement the following:
+
+
+
+
+
+Run weekly/monthly anonymous check-ins: Schedule anonymous surveys (e.g., via web forms) to collect employee feedback on morale and energy. Store responses in Supabase with anonymized identifiers.
+
+
+
+Ask morale/energy questions: Include predefined questions (e.g., “How energized do you feel this week?”) with rating scales or text inputs.
+
+
+
+Detect engagement drops across teams: Analyze survey responses over time to identify trends (e.g., declining morale scores) using basic analytics or AI.
+
+
+
+Recommend interventions or wellness nudges: Suggest actions (e.g., “Schedule team-building activity” or “Send wellness resources”) based on engagement data.
