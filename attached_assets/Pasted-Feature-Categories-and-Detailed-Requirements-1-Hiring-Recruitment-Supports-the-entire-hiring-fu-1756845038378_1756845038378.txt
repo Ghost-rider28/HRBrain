@@ -1,0 +1,167 @@
+Feature Categories and Detailed Requirements
+
+1. Hiring & Recruitment
+
+Supports the entire hiring funnel, from job description (JD) creation to pre-interview candidate summaries. Implement the following capabilities:
+
+Write and customize job descriptions for different roles: Allow HR users to input role details (e.g., title, skills, experience) via a form and generate tailored JDs using an AI model (e.g., OpenAI’s API or Hugging Face). Support editing and saving JDs.
+
+Screen resumes for keyword-role fit: Enable file uploads (PDF resumes) and parse them to extract keywords (e.g., skills, experience) using a library like PyMuPDF or spaCy. Match keywords against JD requirements and display results.
+
+Rank candidates based on skill-role match: Score candidates by comparing resume data to JD criteria (e.g., weighted skill matching). Sort and display candidates in a ranked list.
+
+Auto-schedule interviews based on availability: Integrate with a calendar API (e.g., Google Calendar) to fetch HR and candidate availability and schedule interviews. Send calendar invites via email (e.g., using SendGrid).
+
+Generate summaries for hiring panel: Create concise candidate summaries (e.g., skills, experience, test results) using AI to compile data from resumes and assessments for panel review.
+
+2. Candidate Evaluation & Behavioral Insights
+
+Evaluates candidates through smart assessments and creates data-driven profiles. Implement the following:
+
+Send relevant tests based on role: Allow HR to select role-specific tests (e.g., communication, logic, functional skills) from a predefined library. Email tests to candidates with unique links (e.g., via SendGrid).
+
+Auto-score based on defined criteria: Automatically score test responses using predefined rubrics (e.g., multiple-choice answers) or AI for open-ended responses. Store scores in the candidate’s profile.
+
+Add test results to candidate profiles: Update candidate profiles in Supabase with test scores and results for easy access by HR.
+
+Identify behavioral cues from responses and response time: Use NLP (e.g., Hugging Face Transformers) to analyze open-ended responses for sentiment, confidence, or tone. Track response time to infer traits like decisiveness.
+
+Recommend candidate tags for future talent intelligence: Suggest tags (e.g., “strong communicator,” “technical expert”) based on test results and behavioral analysis for future role matching.
+
+3. Onboarding Support
+
+Helps new employees start with confidence and clarity. Implement the following:
+
+Send welcome kits and onboarding docs automatically: After a candidate is marked hired, trigger emails with digital welcome kits (PDFs with company info) and onboarding documents (e.g., forms, policies) stored in Supabase storage.
+
+Share first-day agenda and tool links: Send a personalized email with a first-day agenda (e.g., meeting schedules) and links to tools (e.g., Slack, HRMS) based on employee role.
+
+Answer onboarding-related FAQs in real time: Build an AI-powered chatbot (e.g., using Dialogflow or a custom NLP model) to answer FAQs about onboarding (e.g., “How do I set up my email?”) in real time via a web interface.
+
+Trigger system setups: Automate account creation for email (e.g., Google Workspace API), Slack (Slack API), and HRMS by triggering API calls when onboarding starts.
+
+3. Onboarding Support
+
+Helps new employees start with confidence and clarity. Implement the following:
+
+
+
+
+
+Send welcome kits and onboarding docs automatically: After a candidate is marked hired, trigger emails with digital welcome kits (PDFs with company info) and onboarding documents (e.g., forms, policies) stored in Supabase storage.
+
+
+
+Share first-day agenda and tool links: Send a personalized email with a first-day agenda (e.g., meeting schedules) and links to tools (e.g., Slack, HRMS) based on employee role.
+
+
+
+Answer onboarding-related FAQs in real time: Build an AI-powered chatbot (e.g., using Dialogflow or a custom NLP model) to answer FAQs about onboarding (e.g., “How do I set up my email?”) in real time via a web interface.
+
+
+
+Trigger system setups: Automate account creation for email (e.g., Google Workspace API), Slack (Slack API), and HRMS by triggering API calls when onboarding starts.
+
+4. Employee Queries & Internal Support
+
+Acts as a self-serve HR helpdesk available 24/7. Implement the following:
+
+Respond to FAQs on leave, policy, insurance, benefits, reimbursements: Deploy an AI chatbot (e.g., using a pre-trained model like BERT or a custom knowledge base) to answer employee queries based on a policy database stored in Supabase.
+
+Share downloadable forms instantly: Allow employees to request forms (e.g., leave request, reimbursement) via the chatbot or a web interface. Retrieve forms from Supabase storage and provide download links.
+
+Send smart reminders for key dates: Automate reminders for appraisal dates, tax document submissions, or policy renewals using a background task scheduler (e.g., Celery) and email notifications.
+
+Development Instructions
+
+1. Environment Setup
+
+Create a .env file to store sensitive configurations:
+
+API keys: Include keys for external services (e.g., OPENAI_API_KEY for AI models, SENDGRID_API_KEY for email, GOOGLE_CALENDAR_API_KEY for scheduling).
+
+Supabase connection details: Include SUPABASE_URL and SUPABASE_KEY for database and storage access.
+
+Example .env content:
+OPENAI_API_KEY=your_openai_key
+SENDGRID_API_KEY=your_sendgrid_key
+GOOGLE_CALENDAR_API_KEY=your_google_key
+SUPABASE_URL=your_supabase_url
+SUPABASE_KEY=your_supabase_key
+
+Ensure the application loads these variables securely using a library like python-dotenv for FastAPI.
+
+2. Tech Stack
+
+Frontend: Use React with JSX, Tailwind CSS for styling, and CDN-hosted dependencies (e.g., https://cdn.jsdelivr.net/npm/react@18.2.0). Create reusable components for dashboards, forms, and chat interfaces.
+
+Backend: Use FastAPI for RESTful APIs. Implement endpoints for each feature (e.g., /api/recruitment/generate-jd, /api/onboarding/send-welcome-kit).
+
+Database: Use Supabase (PostgreSQL) for data storage (e.g., candidates, employees, policies). Use Supabase storage for files (e.g., resumes, onboarding docs).
+
+AI/NLP: Integrate OpenAI or Hugging Face for JD generation, resume parsing, behavioral analysis, and chatbot responses.
+
+External Services: Use SendGrid for emails, Google Calendar for scheduling, Slack/Google Workspace APIs for system setups.
+
+3. Database Schema
+
+Design a Supabase schema with the following key tables:
+
+Users: Store HR and employee details (id, email, role, name, created_at).
+JobPostings: Store JDs (id, title, description, skills, created_by, created_at).
+Candidates: Store candidate data (id, name, email, resume_url, jd_id, status).
+Assessments: Store test data (id, candidate_id, test_type, score, responses, response_time).
+Onboarding: Store onboarding tasks (id, employee_id, welcome_kit_url, agenda, status).
+Policies: Store policy documents (id, title, file_url, category).
+Reminders: Store reminder schedules (id, employee_id, type, due_date, status).
+
+Use foreign keys to link tables (e.g., candidate_id in Assessments references Candidates).
+
+4. Backend API Endpoints
+
+For each feature category, implement the following endpoints:
+
+Hiring & Recruitment:
+POST /api/recruitment/generate-jd: Generate JD using AI (input: role, skills; output: JD text).
+POST /api/recruitment/screen-resume: Parse and score resume (input: resume file, JD ID; output: match score).
+GET /api/recruitment/rank-candidates: Rank candidates for a JD (input: JD ID; output: ranked list).
+POST /api/recruitment/schedule-interview: Schedule interview (input: candidate ID, HR ID, time slots; output: calendar invite).
+GET /api/recruitment/candidate-summary: Generate candidate summary (input: candidate ID; output: summary text).
+
+Candidate Evaluation:
+POST /api/evaluation/send-test: Send test to candidate (input: candidate ID, test_type; output: test link).
+POST /api/evaluation/score-test: Score submitted test (input: test ID, responses; output: score).
+PATCH /api/evaluation/update-profile: Add test results to profile (input: candidate ID, test ID, score).
+POST /api/evaluation/analyze-behavior: Analyze responses for behavioral cues (input: responses, response_time; output: traits, tags).
+
+Onboarding Support:
+POST /api/onboarding/send-welcome-kit: Send welcome kit and docs (input: employee ID; output: email status).
+POST /api/onboarding/share-agenda: Send agenda and tool links (input: employee ID; output: email status).
+POST /api/onboarding/faq: Handle FAQ via chatbot (input: query; output: response).
+POST /api/onboarding/trigger-setups: Trigger system setups (input: employee ID; output: setup status).
+
+Employee Queries:
+POST /api/queries/faq: Answer employee FAQ (input: query; output: response).
+GET /api/queries/forms: Retrieve form download link (input: form_type; output: file_url).
+POST /api/queries/reminders: Schedule reminder (input: employee ID, type, due_date; output: reminder ID).
+
+5. Frontend Components
+
+Hiring Dashboard: Display JDs, candidate lists, and ranking. Include forms for JD creation and resume uploads.
+
+Candidate Profile Page: Show candidate details, test results, and tags. Allow HR to trigger test emails.
+
+Onboarding Portal: Display welcome kits, agendas, and a chatbot for FAQs. Show setup status.
+
+Employee Helpdesk: Embed a chatbot for FAQs and a form download section. Display upcoming reminders.
+
+Use Tailwind CSS for responsive, clean design. Implement real-time updates (e.g., WebSockets for chatbot).
+
+6. Integrations
+
+AI: Use OpenAI/Hugging Face for JD generation, resume parsing, behavioral analysis, and chatbot responses. Load API key from .env.
+
+Email: Use SendGrid for sending welcome kits, agendas, test links, and reminders.
+Calendar: Use Google Calendar API for interview scheduling.
+System Setups: Use Slack/Google Workspace APIs for account creation.
+Supabase: Use Supabase client for database queries and storage (load URL/key from .env).
