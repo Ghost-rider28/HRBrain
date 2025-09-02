@@ -29,23 +29,23 @@ export default function Dashboard() {
 
   const { data: stats, isLoading: statsLoading } = useQuery({
     queryKey: ['/api/dashboard/stats'],
-  });
+  }) as { data: any, isLoading: boolean };
 
   const { data: jobPostings = [] } = useQuery({
     queryKey: ['/api/recruitment/job-postings'],
-  });
+  }) as { data: JobPosting[] };
 
   const { data: candidates = [] } = useQuery({
     queryKey: ['/api/candidates'],
-  });
+  }) as { data: Candidate[] };
 
   const { data: employees = [] } = useQuery({
     queryKey: ['/api/onboarding/employees'],
-  });
+  }) as { data: Employee[] };
 
   const { data: reminders = [] } = useQuery({
     queryKey: ['/api/support/reminders'],
-  });
+  }) as { data: Reminder[] };
 
   const recentActivities = [
     {

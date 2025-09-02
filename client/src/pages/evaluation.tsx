@@ -27,17 +27,17 @@ export default function Evaluation() {
   const { data: candidates = [] } = useQuery({
     queryKey: ['/api/candidates'],
     queryFn: api.getCandidates,
-  });
+  }) as { data: any[] };
 
   const { data: assessments = [] } = useQuery({
     queryKey: ['/api/evaluation/assessments'],
     queryFn: () => api.getAssessments(),
-  });
+  }) as { data: any[] };
 
   const { data: jobPostings = [] } = useQuery({
     queryKey: ['/api/recruitment/job-postings'],
     queryFn: api.getJobPostings,
-  });
+  }) as { data: any[] };
 
   const getAssessmentsForCandidate = (candidateId: number) => {
     return assessments.filter(a => a.candidateId === candidateId);

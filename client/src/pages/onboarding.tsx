@@ -27,12 +27,12 @@ export default function Onboarding() {
   const { data: employees = [], isLoading: employeesLoading } = useQuery({
     queryKey: ['/api/onboarding/employees'],
     queryFn: api.getEmployees,
-  });
+  }) as { data: any[], isLoading: boolean };
 
   const { data: onboardingTasks = [] } = useQuery({
     queryKey: ['/api/onboarding/tasks'],
     queryFn: () => api.getOnboardingTasks(),
-  });
+  }) as { data: any[] };
 
   const getTasksForEmployee = (employeeId: number) => {
     return onboardingTasks.filter(task => task.employeeId === employeeId);

@@ -29,17 +29,17 @@ export default function Hiring() {
   const { data: jobPostings = [], isLoading: jobsLoading } = useQuery({
     queryKey: ['/api/recruitment/job-postings'],
     queryFn: api.getJobPostings,
-  });
+  }) as { data: any[], isLoading: boolean };
 
   const { data: candidates = [] } = useQuery({
     queryKey: ['/api/candidates'],
     queryFn: api.getCandidates,
-  });
+  }) as { data: any[] };
 
   const { data: interviews = [] } = useQuery({
     queryKey: ['/api/interviews'],
     queryFn: api.getInterviews,
-  });
+  }) as { data: any[] };
 
   const getJobCandidates = (jobId: number) => {
     return candidates.filter(c => c.jobPostingId === jobId);

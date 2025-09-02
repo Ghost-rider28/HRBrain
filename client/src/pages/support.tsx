@@ -29,17 +29,17 @@ export default function Support() {
   const { data: documents = [] } = useQuery({
     queryKey: ['/api/support/documents'],
     queryFn: () => api.getDocuments(),
-  });
+  }) as { data: any[] };
 
   const { data: reminders = [] } = useQuery({
     queryKey: ['/api/support/reminders'],
     queryFn: () => api.getReminders(),
-  });
+  }) as { data: any[] };
 
   const { data: chatMessages = [] } = useQuery({
     queryKey: ['/api/support/chat-messages'],
     queryFn: () => api.getChatMessages(),
-  });
+  }) as { data: any[] };
 
   const filteredDocuments = documents.filter(doc =>
     doc.title.toLowerCase().includes(searchQuery.toLowerCase()) ||

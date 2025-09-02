@@ -80,7 +80,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const [user] = await db.insert(users).values(insertUser).returning();
+    const [user] = await db.insert(users).values([insertUser]).returning();
     return user;
   }
 
@@ -95,7 +95,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createJobPosting(jobPosting: InsertJobPosting): Promise<JobPosting> {
-    const [created] = await db.insert(jobPostings).values(jobPosting).returning();
+    const [created] = await db.insert(jobPostings).values([jobPosting]).returning();
     return created;
   }
 
@@ -118,7 +118,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createCandidate(candidate: InsertCandidate): Promise<Candidate> {
-    const [created] = await db.insert(candidates).values(candidate).returning();
+    const [created] = await db.insert(candidates).values([candidate]).returning();
     return created;
   }
 
@@ -145,7 +145,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createAssessment(assessment: InsertAssessment): Promise<Assessment> {
-    const [created] = await db.insert(assessments).values(assessment).returning();
+    const [created] = await db.insert(assessments).values([assessment]).returning();
     return created;
   }
 
@@ -165,7 +165,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createInterview(interview: InsertInterview): Promise<Interview> {
-    const [created] = await db.insert(interviews).values(interview).returning();
+    const [created] = await db.insert(interviews).values([interview]).returning();
     return created;
   }
 
@@ -185,7 +185,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createEmployee(employee: InsertEmployee): Promise<Employee> {
-    const [created] = await db.insert(employees).values(employee).returning();
+    const [created] = await db.insert(employees).values([employee]).returning();
     return created;
   }
 
@@ -203,7 +203,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createOnboardingTask(task: InsertOnboardingTask): Promise<OnboardingTask> {
-    const [created] = await db.insert(onboardingTasks).values(task).returning();
+    const [created] = await db.insert(onboardingTasks).values([task]).returning();
     return created;
   }
 
@@ -226,7 +226,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createDocument(document: InsertDocument): Promise<Document> {
-    const [created] = await db.insert(documents).values(document).returning();
+    const [created] = await db.insert(documents).values([document]).returning();
     return created;
   }
 
@@ -239,7 +239,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createReminder(reminder: InsertReminder): Promise<Reminder> {
-    const [created] = await db.insert(reminders).values(reminder).returning();
+    const [created] = await db.insert(reminders).values([reminder]).returning();
     return created;
   }
 
@@ -257,7 +257,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createChatMessage(message: InsertChatMessage): Promise<ChatMessage> {
-    const [created] = await db.insert(chatMessages).values(message).returning();
+    const [created] = await db.insert(chatMessages).values([message]).returning();
     return created;
   }
 }
